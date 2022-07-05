@@ -23,6 +23,10 @@
     <template v-slot:header>
         <h2>Title of popup</h2>
     </template>
+
+    <template v-slot:exposed="{ newTitle }">
+        <h2>{{ newTitle }}</h2>
+    </template>
   </popup>
 </template>
 

@@ -5,10 +5,12 @@
     <div class="popup-container">
 
         <slot name="header" />
-        <br>
+        
         <slot name="body" />
-        <br>
+        
         <slot name="footer" />
+
+        <slot name="exposed" :newTitle="newTitle"></slot>
 
         <!--
         <slot>
@@ -23,15 +25,12 @@
 
 <script>
 export default {
-    props: {
-        title: {
-            type: String,
-            required: true
-        }
-    },
+    props: ['title'],
     emits: ['on:close'],
     setup( props, context ) {
-
+      return {
+        newTitle: props.title?.toUpperCase()
+      }
     }
 }
 </script>
