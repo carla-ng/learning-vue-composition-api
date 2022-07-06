@@ -34,21 +34,50 @@
         </ul>
     </div>
 
+    <button @click="isOpen=true">Create todo</button>
+
+    <popup v-if="isOpen"
+           @on:close="isOpen=false">
+        <template v-slot:header>
+            <h1>New task</h1>
+        </template>
+
+        <template v-slot:body>
+            <form @submit.prevent="createToDo(newTodoText); isOpen=false">
+                <input type="text"
+                       placeholder="Add new task here"
+                       v-model="newTodoText">
+
+                <br>
+                <br>
+
+                <button type="submit">Create</button>
+            </form>
+        </template>
+    </popup>
+
 </template>
 
 <script>
 import useTodos from  '../composables/useTodos'
+import Popup from '../components/Popup.vue'
+import { ref } from 'vue'
 
 export default {
+    components: { Popup },
     setup() {
 
-        const { pending, currentTab, getTodosByTab, toggleToDo } = useTodos()
+        const { pending, createToDo, currentTab, getTodosByTab, toggleToDo } = useTodos()
 
         return {
             pending,
+            createToDo,
             currentTab,
             getTodosByTab,
-            toggleToDo
+            toggleToDo,
+
+            isOpen: ref(false),
+            newTodoText: ref('')
         }
     }
 }

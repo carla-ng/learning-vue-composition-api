@@ -18,7 +18,8 @@ const useTodos = () => {
         getTodosByTab: computed( () => store.getters['getTodosByTab'](currentTab.value) ),
 
         // Methods
-        toggleToDo: ( id ) => store.commit('toggleToDo', id)
+        toggleToDo: ( id ) => store.commit('toggleToDo', id),
+        createToDo: ( text ) => store.commit('createToDo', text)
     }
 }
 
